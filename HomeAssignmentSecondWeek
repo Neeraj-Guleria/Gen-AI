@@ -1,0 +1,320 @@
+You are a senior QA test analyst.  
+I will describe a feature of a banking application:  
+
+Feature: Transfer money from one person to another.
+Context:  
+- A user can log in to the application.  
+- Select "Transfer Money".  
+- Enter recipient details (account number / UPI ID / contact).  
+- Enter transfer amount.  
+- Select payment method (bank account, wallet, card).  
+- Confirm with authentication (PIN/OTP/Biometric).  
+- Money is debited from sender and credited to recipient.  
+- Confirmation receipt/transaction ID is shown.  
+
+Your task is to:  
+1. [MANDATORY] Write **manual test cases** in a structured format (Test Case ID, Title, Precondition, Steps, Expected Result).  
+2. Cover the following scenarios:  
+   - Positive flow (successful transfer).  
+   - Negative flow (invalid account, insufficient balance, wrong OTP, etc.).  
+   - Edge cases (max amount, min amount, special characters in input).  
+   - Security cases (multiple failed logins, invalid authentication, duplicate submission).  
+   - Performance/UX cases (transaction timeout, slow network).  
+3. Ensure test cases are **clear, step-by-step, and executable** by a manual tester.  
+
+You are a senior QA test analyst.  
+I will describe a feature of a banking application: 
+
+Feature: Transfer money from one person to another.
+ 
+ 1. [CRITICAL] - Verify the money debited and credited to the intended persons
+ 2. [IMPORTANT] - Verify the limit of the money transfer
+ 3. Use success message at the end of the test case execution
+ 
+
+
+I'm a Senior QA Analyst working in a Banking Application,help me in Generate some Functional test cases for validating fund transfer activity from one account to another account in a Banking application.
+INSTRUCTIONS:
+[MANDATORY] Cover both Positive & negative Testcases
+[CRITICAL] Make sure that the Test cases are easy to understand and executed by anyone who is new for testing this Application.
+[IMPORTANT] Make sure that the count does not exceed 100 Test cases
+CONTEXT:
+Considering you are an AI Expert in Banking Applications and you are well versed with all the functionalities of the Banking Application.
+
+Context:
+
+You are AI coding assistant to convert given HTML DOM to selenium java code for leaftaps applciation.
+
+Instructions:
+- Parse for the right locators using below strategy
+   - Locator Strategy
+- Action ??
+-Exception
+-Timeout
+-Comments
+
+Example 1:
+Input DOM:
+
+
+Output code:
+
+Example 2:
+Input DOM:
+
+
+Output code:
+
+
+
+
+- Prompt 
+
+- Context: - You are an AI assistan who convert given Selenium code to Playwright typescript for the below selenium code 
+- Instructions 
+			  - [MANDATORY] Create a typescript from the given Selenium java code 
+			  - [CRITICAL] Instead of Java main method - use test method in Playwright typescript 
+			  - [IMPORTANT] Consider the waits and Make sure you choose correct and latest working locator
+   
+import { test, expect } from '@playwright/test';
+
+test('Create Lead flow', async ({ page }) => {
+  // Step 1) Load the URL
+  await page.goto('http://leaftaps.com/opentaps');
+
+  // Step 2) Maximize the browser (Playwright launches full window by default, but adding for clarity)
+  await page.setViewportSize({ width: 1920, height: 1080 });
+
+  // Step 3) Enter username
+  await page.fill('#username', 'DemoSalesManager');
+
+  // Step 4) Enter password
+  await page.fill('#password', 'crmsfa');
+
+  // Step 5) Click login button
+  await page.click('.decorativeSubmit');
+
+  // Step 6) Verify the title after login
+  await expect(page).toHaveTitle(/Leaftaps/);
+
+  // Step 7) Click CRM/SFA link
+  await page.click('text=CRM/SFA');
+
+  // Step 8) Click Create Lead link
+  await page.click('text=Create Lead');
+
+  // Step 9) Fill company name
+  await page.fill('#createLeadForm_companyName', 'TestLeaf');
+
+  // Step 10) Fill first name
+  await page.fill('#createLeadForm_firstName', 'Babu');
+
+  // Step 11) Fill last name
+  await page.fill('#createLeadForm_lastName', 'Manickam');
+
+  // Step 12 b) Select Source dropdown by visible text
+  await page.selectOption('#createLeadForm_dataSourceId', { label: 'Employee' });
+
+  // Step 12 c) Select Marketing Campaign by value
+  await page.selectOption('#createLeadForm_marketingCampaignId', { value: '9001' });
+
+  // Step 13) Click Create Lead Button
+  await page.click('input[name="submitButton"]');
+
+  // Step 14) Verify the new title
+  const newTitle = await page.title();
+  console.log('Page Title after creating lead:', newTitle);
+  await expect(page).toHaveTitle(/View Lead/);
+});
+
+- Once you convert, you need to copy to this URL and run !
+https://try.playwright.tech/?l=playwright-test
+
+Logs
+
+Running 1 test using 1 worker
+
+Page Title after creating lead:
+✓ 1 example.spec.ts:3:5 › Create Lead flow (16.5s)
+
+1 passed (18.2s)
+Files
+
+trace.zip - Open in Trace Viewer
+
+Duration of 19284 ms with Playwright version 1.53.1.
+
+Hint: Use ICE POT framework to generate !! 
+
+Note: 
+
+- The selenium code should be working code 
+
+https://github.com/TestLeafInc/TestLeafSeleniumTraining
+
+Homework Assignment 2:
+
+Integrate the prompt to your API (using postman) and confirm the response (json)
+
+Objective: You can integrate prompt + LLM API
+
+JSON Payload
+{
+"model": "deepseek-r1-distill-llama-70b",
+"messages": [{
+    "role": "user",
+    "content": "\n  \"code\": \"import { test, expect } from '@playwright/test';\\n\\ntest('Create Lead flow', async ({ page }) => {\\n  // Step 1) Load the URL\\n  await page.goto('http://leaftaps.com/opentaps');\\n\\n  // Step 2) Maximize the browser (Playwright launches full window by default, but adding for clarity)\\n  await page.setViewportSize({ width: 1920, height: 1080 });\\n\\n  // Step 3) Enter username\\n  await page.fill('#username', 'DemoSalesManager');\\n\\n  // Step 4) Enter password\\n  await page.fill('#password', 'crmsfa');\\n\\n  // Step 5) Click login button\\n  await page.click('.decorativeSubmit');\\n\\n  // Step 6) Verify the title after login\\n  await expect(page).toHaveTitle(/Leaftaps/);\\n\\n  // Step 7) Click CRM/SFA link\\n  await page.click('text=CRM/SFA');\\n\\n  // Step 8) Click Create Lead link\\n  await page.click('text=Create Lead');\\n\\n  // Step 9) Fill company name\\n  await page.fill('#createLeadForm_companyName', 'TestLeaf');\\n\\n  // Step 10) Fill first name\\n  await page.fill('#createLeadForm_firstName', 'Babu');\\n\\n  // Step 11) Fill last name\\n  await page.fill('#createLeadForm_lastName', 'Manickam');\\n\\n  // Step 12 b) Select Source dropdown by visible text\\n  await page.selectOption('#createLeadForm_dataSourceId', { label: 'Employee' });\\n\\n  // Step 12 c) Select Marketing Campaign by value\\n  await page.selectOption('#createLeadForm_marketingCampaignId', { value: '9001' });\\n\\n  // Step 13) Click Create Lead Button\\n  await page.click('input[name=\\\\\\\"submitButton\\\\\\\"]');\\n\\n  // Step 14) Verify the new title\\n  const newTitle = await page.title();\\n  console.log('Page Title after creating lead:', newTitle);\\n  await expect(page).toHaveTitle(/View Lead/);\\n});\"\n"
+}]
+}
+
+-Response
+{
+    "id": "chatcmpl-753c1441-a7c1-472e-9c60-6a7301d56500",
+    "object": "chat.completion",
+    "created": 1757693564,
+    "model": "deepseek-r1-distill-llama-70b",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "<think>\nOkay, so I have this Playwright test script for a Create Lead flow on some application. Let me try to understand what's going on here.\n\nFirst, the script starts by importing test and expect from '@playwright/test'. That makes sense because those are the main functions you need for writing tests in Playwright.\n\nThen, it defines a test called 'Create Lead flow' which is an async function taking a page parameter. That's standard for Playwright tests.\n\nStep 1 is navigating to 'http://leaftaps.com/opentaps'. I guess that's the login page of the application. \n\nStep 2 sets the viewport size to 1920x1080. The comment says Playwright launches in full window by default, but they added it for clarity. Maybe they want to ensure it's always fullscreen, or maybe it's just for consistency across different environments.\n\nSteps 3 and 4 fill in the username and password fields. The username is 'DemoSalesManager' and the password is 'crmsfa'. I wonder if those are default credentials or if they're specific to the test environment. Hopefully, they're not using real credentials here.\n\nStep 5 clicks the login button using the class 'decorativeSubmit'. That seems a bit fragile because class names can change, but maybe that's how the application is set up.\n\nStep 6 checks if the page title contains 'Leaftaps' after login. That's a good practice to ensure the user is logged in correctly.\n\nStep 7 clicks on the 'CRM/SFA' link. I'm not familiar with the application, but I assume that's where the Create Lead functionality is.\n\nStep 8 clicks on 'Create Lead' to navigate to the form. \n\nThen, Steps 9-11 fill in company name, first name, and last name. Those are straightforward form fills.\n\nStep 12b selects the 'Source' dropdown by visible text 'Employee'. That's good because selecting by label is more readable and less likely to break if IDs change.\n\nStep 12c selects the 'Marketing Campaign' by value '9001'. Using value here might be because the option's value is more stable than the text, or maybe the text isn't unique.\n\nStep 13 clicks the submit button using a CSS selector with an escaped attribute. That seems a bit complex, but I guess it's necessary if the button doesn't have a more straightforward identifier.\n\nStep 14 checks the page title after submission to ensure it's 'View Lead', which confirms that the lead was created successfully.\n\nI'm thinking about possible improvements. Maybe adding some waits or checks between steps to ensure elements are loaded before interacting with them. Also, using more descriptive selectors or adding a timeout to the expect statements could make the test more robust.\n\nAnother thing is error handling. If any step fails, the test should fail gracefully. Maybe adding try-catch blocks or using Playwright's built-in retries could help with flakiness.\n\nAlso, verifying the lead details after creation could add more confidence. They could check if the company name, first name, etc., are displayed correctly on the View Lead page.\n\nI wonder if the test data is being cleaned up after the test runs. If not, it might cause issues with subsequent tests or leave the database cluttered. Maybe adding a teardown step to delete the created lead would be good.\n\nOverall, the test seems to cover the basic flow, but there's room for making it more reliable and comprehensive.\n</think>\n\nHere's a step-by-step explanation of the provided Playwright test script for the Create Lead flow:\n\n1. **Import Necessary Modules**: The test starts by importing `test` and `expect` from `@playwright/test`, which are essential for defining and asserting the test case.\n\n2. **Define Test Case**: The test case is named 'Create Lead flow' and is an asynchronous function that takes a `page` object as a parameter.\n\n3. **Navigate to Application**: The test navigates to `http://leaftaps.com/opentaps`, which is the login page of the application.\n\n4. **Set Viewport Size**: The viewport is set to 1920x1080 to ensure the test runs in a fullscreen environment, enhancing consistency across different setups.\n\n5. **Login to Application**:\n   - **Username**: Fills in the username field with 'DemoSalesManager'.\n   - **Password**: Fills in the password field with 'crmsfa'.\n   - **Submit**: Clicks the login button identified by the class `decorativeSubmit`.\n\n6. **Verify Login Success**: Checks if the page title contains 'Leaftaps' after login, ensuring successful navigation to the home page.\n\n7. **Navigate to Create Lead**:\n   - Clicks on the 'CRM/SFA' link to access the CRM section.\n   - Clicks on 'Create Lead' to open the lead creation form.\n\n8. **Fill Lead Information**:\n   - **Company Name**: Enters 'TestLeaf' in the company name field.\n   - **First Name**: Enters 'Babu' in the first name field.\n   - **Last Name**: Enters 'Manickam' in the last name field.\n\n9. **Select Dropdowns**:\n   - **Source**: Selects 'Employee' from the Source dropdown using the visible text.\n   - **Marketing Campaign**: Selects the option with the value '9001' from the Marketing Campaign dropdown.\n\n10. **Submit Lead Form**: Clicks the submit button to create the lead, identified by the CSS selector `input[name=\\\"submitButton\\\"]`.\n\n11. **Verify Lead Creation**: Checks if the page title contains 'View Lead' after submission, confirming the lead was successfully created.\n\nThis test script effectively automates the user journey for creating a new lead in the application, covering all necessary steps from login to successful submission and verification."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.050162368,
+        "prompt_tokens": 499,
+        "prompt_time": 0.054422462,
+        "completion_tokens": 1202,
+        "completion_time": 4.419435521,
+        "total_tokens": 1701,
+        "total_time": 4.473857983
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_1bbe7845ec",
+    "x_groq": {
+        "id": "req_01k4zb6hm3etx915jfnp5cwdz0"
+    },
+    "service_tier": "on_demand"
+}
+
+Homework Assignment 3 & 4:
+
+Generate test data for credit card applications for different types of cards and conditions
+
+-Prompt
+
+Context:
+
+You are an AI assistant helping generate test data for a credit card application system.
+
+Instruction:
+- [Mandatory] - Generate test data covering multiple card types (Visa, MasterCard, American Express etc.).
+- [Critical] - Include different conditions:
+   - Valid cards
+   - Expired cards
+   - Invalid numbers
+   - Wrong CVV length
+   - Edge cases (very old expiry year, very far future expiry, short/long names).
+-  For each test case, include:
+   - Card Type
+   - Card Number
+   - Expiry Date
+   - CVV
+   - Cardholder Name
+   - Expected Result (Pass/Fail + Reason)
+Example:
+ - {
+    "CardType": "Visa",
+    "CardNumber": "411111111111112",
+    "ExpiryDate": "09/2028",
+    "CVV": "321",
+    "CardholderName": "Robert Brown",
+    "ExpectedResult": "Fail - Invalid card number"
+  }
+- Output: should be in tabular format
+
+| Card Type        | Card Number      | Expiry Date | CVV  | Cardholder Name               | Expected Result                                |
+| ---------------- | ---------------- | ----------- | ---- | ----------------------------- | ---------------------------------------------- |
+| Visa             | 4111111111111111 | 12/2027     | 123  | John Doe                      | Pass - Valid Visa card                         |
+| MasterCard       | 5500000000000004 | 05/2023     | 456  | Jane Smith                    | Fail - Expired card                            |
+| American Express | 371449635398431  | 08/2030     | 1234 | Michael Johnson               | Pass - Valid Amex with 4-digit CVV             |
+| Discover         | 6011111111111117 | 01/2040     | 99   | A                             | Fail - Invalid CVV length, suspicious name     |
+| Visa             | 411111111111112  | 09/2028     | 321  | Robert Brown                  | Fail - Invalid card number (Luhn check failed) |
+| MasterCard       | 5105105105105100 | 11/2026     | 000  | Priya R                       | Pass - Valid MasterCard with edge CVV          |
+| Visa             | 4000000000000002 | 07/2015     | 789  | Daniel Williams               | Fail - Very old expired card                   |
+| American Express | 378282246310005  | 03/2099     | 4321 | Elizabeth Alexandra Catherine | Pass - Valid Amex with long name               |
+| Discover         | 6011000990139424 | 10/2025     | 111  | Chen Wei                      | Pass - Valid Discover card                     |
+| Visa             | 4222222222222    | 04/2029     | 12   | Carlos Gomez                  | Fail - CVV too short                           |
+| MasterCard       | 2223000048400011 | 02/2050     | 123  | A B                           | Pass - Valid MasterCard with short name        |
+| Visa             | 4111111111111135 | 06/2031     | 321  | Sarah Connor                  | Fail - Invalid card number (Luhn check failed) |
+| American Express | 371449635398432  | 09/2028     | 12   | Matthew Lee                   | Fail - Invalid CVV length for Amex (too short) |
+| Discover         | 6500000000000002 | 07/2024     | 123  | Fatima Khan                   | Fail - Expired card                            |
+| Visa             | 4012888888881881 | 08/2027     | 456  | Oliver Twist                  | Pass - Valid Visa card                         |
+
+This set covers:
+
+✅ Valid cards (Visa, MasterCard, Amex, Discover)
+
+✅ Expired cards
+
+✅ Luhn check failures
+
+✅ Wrong CVV lengths (too short/too long)
+
+✅ Edge cases (short names, very long names, extreme expiry years)
+
+
+JSON Payload
+
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Context:\n\nYou are an AI assistant helping generate test data for a credit card application system.\n\nInstruction:\n- [Mandatory] - Generate test data covering multiple card types (Visa, MasterCard, American Express etc.).\n- [Critical] - Include different conditions:\n   - Valid cards\n   - Expired cards\n   - Invalid numbers\n   - Wrong CVV length\n   - Edge cases (very old expiry year, very far future expiry, short/long names).\n- For each test case, include:\n   - Card Type\n   - Card Number\n   - Expiry Date\n   - CVV\n   - Cardholder Name\n   - Expected Result (Pass/Fail + Reason)\n- Output: should be in tabular format\n\nExample:\n- {\n    \"CardType\": \"Visa\",\n    \"CardNumber\": \"411111111111112\",\n    \"ExpiryDate\": \"09/2028\",\n    \"CVV\": \"321\",\n    \"CardholderName\": \"Robert Brown\",\n    \"ExpectedResult\": \"Fail - Invalid card number\"\n  "
+ }
+  ],
+  "temperature": 0.3,
+  "max_tokens": 100
+}
+
+JSON Response:
+
+{
+    "id": "chatcmpl-e2ed3496-9b6d-4c6d-8433-fb51314f3300",
+    "object": "chat.completion",
+    "created": 1757698990,
+    "model": "llama-3.3-70b-versatile",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "Here is the test data for the credit card application system:\n\n| Card Type | Card Number | Expiry Date | CVV | Cardholder Name | Expected Result |\n| --- | --- | --- | --- | --- | --- |\n| Visa | 4111111111111111 | 09/2028 | 123 | John Doe | Pass - Valid card |\n| MasterCard | 5105105105105100 | 12/2025 | 456 | Jane Smith | Pass -"
+            },
+            "logprobs": null,
+            "finish_reason": "length"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.05102679,
+        "prompt_tokens": 256,
+        "prompt_time": 0.026913749,
+        "completion_tokens": 100,
+        "completion_time": 0.200293204,
+        "total_tokens": 356,
+        "total_time": 0.227206953
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_3f3b593e33",
+    "x_groq": {
+        "id": "req_01k4zgc855fydtty8syqwa8mm5"
+    },
+    "service_tier": "on_demand"
+}
+
+
