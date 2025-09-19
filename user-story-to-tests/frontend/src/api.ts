@@ -61,3 +61,43 @@ export async function fetchJira(issueId: string): Promise<JiraFetchResponse> {
     throw error instanceof Error ? error : new Error('Unknown error occurred');
   }
 }
+
+export async function generateTestData(
+  request: GenerateRequest
+): Promise<GenerateResponse> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/testdata/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const err = await response
+        .json()
+        .catch(() => ({ error: 'Unknown error' }));
+      throw new Error(err.error || `HTTP error! status: ${response.status}`);
+    }
+
+    const data: GenerateResponse = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error generating test data:', error);
+    throw error instanceof Error ? error : new Error('Unknown error occurred');
+  }
+}
+
+export async function fetchCsvForCases(cases: any[]): Promise<Blob> {
+  const response = await fetch(`${API_BASE_URL}/testdata/csv`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ cases }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(err.error || `HTTP error! status: ${response.status}`);
+  }
+
+  return await response.blob();
+}

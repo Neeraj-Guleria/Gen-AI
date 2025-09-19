@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { generateTests, fetchJira } from './api'
+import { generateTests, fetchJira, generateTestData, fetchCsvForCases } from './api'
 import { GenerateRequest, GenerateResponse, TestCase, TestCategory, TestFormat, JiraFetchResponse } from './types'
 
 const TEST_CATEGORIES: TestCategory[] = ['Positive', 'Negative', 'E2E', 'Edge Case', 'Performance']
@@ -19,6 +19,7 @@ function App() {
   const [jiraLoading, setJiraLoading] = useState<boolean>(false)
   const [jiraError, setJiraError] = useState<string | null>(null)
   const [results, setResults] = useState<GenerateResponse | null>(null)
+  const [testDataResults, setTestDataResults] = useState<GenerateResponse | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const [expandedTestCases, setExpandedTestCases] = useState<Set<string>>(new Set())
@@ -73,6 +74,49 @@ function App() {
       setError(err instanceof Error ? err.message : 'Failed to generate tests')
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleGenerateTestData = async () => {
+    if (!formData.storyTitle.trim() || !formData.acceptanceCriteria.trim()) {
+      setError('Story Title and Acceptance Criteria are required')
+      return
+    }
+    if (formData.categories.length === 0) {
+      setError('Please select at least one test category')
+      return
+    }
+
+    setIsLoading(true)
+    setError(null)
+    try {
+      const resp = await generateTestData(formData)
+      setTestDataResults(resp)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate test data')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDownloadCsv = async (cases?: any[]) => {
+    const toUse = cases ?? testDataResults?.cases ?? results?.cases
+    if (!toUse || toUse.length === 0) {
+      setError('No test cases available to download')
+      return
+    }
+    try {
+      const blob = await fetchCsvForCases(toUse)
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'test-cases.csv'
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to download CSV')
     }
   }
 
@@ -635,6 +679,70 @@ function App() {
         {isLoading && (
           <div className="loading">
             Generating test cases...
+          </div>
+        )}
+
+        <div style={{display: 'flex', gap: 12, marginBottom: 16}}>
+          <button
+            type="button"
+            className="submit-btn"
+            onClick={() => handleGenerateTestData()}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Generating...' : 'Generate Test Data'}
+          </button>
+          <button
+            type="button"
+            className="submit-btn"
+            onClick={() => handleDownloadCsv()}
+            disabled={isLoading}
+            style={{background: '#2d7aef'}}
+          >
+            Download CSV (All)
+          </button>
+        </div>
+
+        {testDataResults && (
+          <div className="results-container" style={{marginBottom: 20}}>
+            <div className="results-header">
+              <h2 className="results-title">Generated Test Data</h2>
+              <div className="results-meta">
+                {testDataResults.cases.length} test data case(s) generated
+                {testDataResults.model && ` • Model: ${testDataResults.model}`}
+              </div>
+            </div>
+            <div style={{marginBottom: 12}}>
+              <button
+                type="button"
+                className="submit-btn"
+                onClick={() => handleDownloadCsv(testDataResults.cases)}
+                style={{background: '#27ae60'}}
+              >
+                Download CSV (Test Data)
+              </button>
+            </div>
+            <div className="table-container">
+              <table className="results-table">
+                <thead>
+                  <tr>
+                    <th>Test Case ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Test Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {testDataResults.cases.map((tc: TestCase) => (
+                    <tr key={tc.id}>
+                      <td>{tc.id}</td>
+                      <td>{tc.title}</td>
+                      <td>{tc.category}</td>
+                      <td>{tc.testData || 'N/A'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
